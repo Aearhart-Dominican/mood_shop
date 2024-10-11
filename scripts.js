@@ -85,13 +85,14 @@ const removeFromCart = (id) => {
     }
 }
 
-document.body.addEventListener('click', (e) => {
-    if (e.target.matches('.add-to-cart')) {
-        console.log(e.target)
-        addItemToCart(e.target.id, e.target.dataset.price)
-        console.log(cart) // Use console.log to test your work
+const getCartTotal = () => {
+    let total = 0
+    for (let i = 0; i < cart.length; i += 1) {
+        const item = cart[i]
+        total += item.qty * item.price
     }
-})
+    return total.toFixed(2) // return total
+}
 
 const displayCart = () => {
     let cartStr = ''
@@ -106,9 +107,12 @@ const displayCart = () => {
         <button class="button-sub" data-id="${item.id}">-</button>
       </li>`
     }
-    // Get the cart 
+    // Get the total cost in the cart
+    const cartTotal = getCartTotal()
+    // append a li tag at the end of the cartStr with the total
+    cartStr += `<li>Total: ${cartTotal}</li>`
+
     const cartItems = document.querySelector('#cart-items')
-    // Set the inner html of the cart
     cartItems.innerHTML = cartStr
 }
 
