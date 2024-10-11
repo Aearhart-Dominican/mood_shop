@@ -126,3 +126,40 @@ document.body.addEventListener('click', (e) => {
         displayCart() // display the cart
     }
 })
+
+const updateCart = (id, val) => {
+    console.log(id, val)
+    for (let i = 0; i < cart.length; i += 1) {
+        const item = cart[i]
+        if (id === item.id) {
+            item.qty = val
+            // If the value is less than 1
+            if (item.qty < 1) {
+            // remove this item from the cart
+            cart.splice(i, 1)
+            }
+        return 
+        }
+    }
+}
+
+document.body.addEventListener('change', (e) => {
+    if (e.target.matches('.input-qty')) {
+        const name = e.target.dataset.id // get the id
+        const value = parseInt(e.target.value) // get the value from the input
+        updateCart(name, value) // call updateCart with the id and value
+        displayCart() // display the cart
+    }
+})
+
+document.body.addEventListener('keydown', (e) => {
+    if (e.target.matches('.input-qty')) {
+        if (e.key === "Enter") {
+            const name = e.target.dataset.id
+            const value = parseInt(e.target.value)
+            updateCart(name, value)
+            console.log(e)
+            displayCart()
+        }
+    }
+})
