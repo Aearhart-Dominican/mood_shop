@@ -29,6 +29,8 @@ for (let i = 0; i < data.length; i += 1) {
     newDiv.appendChild(price)
 
     const button = document.createElement('button')
+    // add a class name to the button
+    button.className = 'add-to-cart'
 	// add an  id name to the button
 	button.dataset.id = data[i].name
 	// creates a custom attribute called data-price. That will hold price for each element in the button
